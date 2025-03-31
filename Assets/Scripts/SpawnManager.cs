@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        if (playerControllerScript.getGameOverStatut() != true)
+        if (playerControllerScript.GetGameOverStatut() != true)
         {
             Instantiate(obstacle, spawnPosition, obstacle.transform.rotation);
         }

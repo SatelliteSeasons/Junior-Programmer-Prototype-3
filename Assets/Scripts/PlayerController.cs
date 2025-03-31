@@ -16,18 +16,19 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip explosionSound;
 
-    public float jumpForce;
+    public float jumpForce = 600;
     public float gravityForce;
     private bool estSurSol;
 
     private bool gameOver = false;
+    private float gravityEarth = -9.81f;
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
 
-        Physics.gravity *= gravityForce;
+        Physics.gravity = new Vector3(0, gravityEarth * gravityForce, 0);
         estSurSol = true;
         gameOver = false;
     }
@@ -57,7 +58,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("GAMEOVER");
             gameOver = true;
             dirt.Stop();
             playerAnimation.SetBool("Death_b", true);
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool getGameOverStatut()
+    public bool GetGameOverStatut()
     {
         return gameOver;
     }
